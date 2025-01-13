@@ -1,3 +1,4 @@
+import torch
 import numpy as np
 import pandas as pd
 import argparse
@@ -12,7 +13,7 @@ from model_params import smarts_file_path
 
 warnings.filterwarnings("ignore", message="'data.DataLoader' is deprecated, use 'loader.DataLoader' instead",
                         category=UserWarning)
-
+map_location=torch.device('cpu')
 
 # 获取具有可电离位点的SMILES的01字符串
 def get_ionizable_smiles_binary(smiles_list, smarts_file_path, acid_or_base):
@@ -99,8 +100,8 @@ if __name__ == '__main__':
     ionizable_binary_basic = get_ionizable_smiles_binary(smiles_list, smarts_file_path, 'base')
 
     # 导入模型
-    model_acidic = load(r'model/GraFpKa_acidic_model.pth').to(devices)
-    model_basic = load(r'model/GraFpKa_basic_model.pth').to(devices)
+    model_acidic = load(r'model/GraFpKa_acidic_model.pth',map_location=torch.device('cpu')).to(devices)
+    model_basic = load(r'model/GraFpKa_basic_model.pth',map_location=torch.device('cpu')).to(devices)
 
     # 预测pKa，保持与原始SMILES列表的对应关系
     pKa_acidic = predict_pKa(smiles_list, ionizable_binary_acidic, model_acidic)

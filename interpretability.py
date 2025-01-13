@@ -9,6 +9,7 @@ from graph_creating import get_graph
 from torch import load
 from rdkit import Chem
 import multiprocessing
+import torch
 
 
 # 获取具有可电离位点的SMILES的01字符串
@@ -58,8 +59,8 @@ if __name__ == '__main__':
         smiles_list = smiles_df[0].tolist()  # 获取第一列的数据作为SMILES列表
 
     # 定义模型
-    model_acidic = load(r'model/GraFpKa_acidic_model.pth').to(devices)
-    model_basic = load(r'model/GraFpKa_basic_model.pth').to(devices)
+    model_acidic = load(r'model/GraFpKa_acidic_model.pth',map_location=torch.device('cpu')).to(devices)
+    model_basic = load(r'model/GraFpKa_basic_model.pth',map_location=torch.device('cpu')).to(devices)
 
     # 获取具有可电离位点的SMILES的01字符串
     ionizable_binary_acidic = get_ionizable_smiles_binary(smiles_list, smarts_file_path, 'acid')

@@ -1,3 +1,2 @@
 Smiles,pKa,basicOrAcidic
-Cc1ccccc1NN=C(C#N)C#N,0.0,XXX
-COc1cccc(S(N)(=O)=O)c1,0.0,XXX
+OC(C1=CC(C2CCNCC2)=CC=C1)=O,0.0,XXX
