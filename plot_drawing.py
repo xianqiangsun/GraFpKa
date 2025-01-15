@@ -283,6 +283,9 @@ def highlight_atoms_or_bonds_from_IG(model, smiles, inputs, baselines, target, a
     weight = attributions.sum(dim=1).cpu()  # 计算权重，以每一个原子的所有特征的积分梯度值之和作为权重
     index = [x for x in range(inputs.shape[0])]
     atoms_or_bonds = 'atoms'
+    # Print out the atom index and its corresponding weight value
+    for i, w in zip(index, weight):
+        print(f"Atom Index: {i}, Weight: {w.item()}")
     highlight_atoms_or_bonds_from_weights(smiles=smiles, index=index, weights=weight, save_path=save_path,
                                           atoms_or_bonds=atoms_or_bonds, normalize=False, threshold=threshold)  # 可视化
 
