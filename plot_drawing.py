@@ -299,6 +299,7 @@ def batch_highlight_atoms_or_bonds_from_IG(data, model, save_path, devices, acid
         batch = torch.zeros(data_i.x.shape[0], dtype=torch.int64).to(devices)
         internal_batch_size = data_i.edge_index.shape[1] / 2
         save_path_i = save_path + acidic_or_basisc + '_' + str(i).zfill(4) + '.png'  # 需要更多数量时，可以把4改成更大的数字
+        print(f"Calculating {acidic_or_basisc} IG for molecule {i}.")
         highlight_atoms_or_bonds_from_IG(model=model,
                                          smiles=data_i.Smiles,
                                          inputs=data_i.x,
